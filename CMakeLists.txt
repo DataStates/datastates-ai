@@ -1,8 +1,8 @@
-cmake_minimum_required (VERSION 3.20)
+cmake_minimum_required (VERSION 3.25)
 project (datastates_ai VERSION 0.1.0 
     DESCRIPTION "capture states of data for AI models"
     HOMEPAGE_URL "https://github.com/datastates/dstates_ai"
-    LANGUAGES CXX)
+    LANGUAGES CXX CUDA)
 
 if (NOT CMAKE_BUILD_TYPE)
     set (CMAKE_BUILD_TYPE Release
@@ -20,7 +20,9 @@ include(GNUInstallDirs)
 include(CTest)
 include(FetchContent)
 find_package(thallium REQUIRED)
-find_package(Python REQUIRED)
+find_package(Python REQUIRED COMPONENTS Interpreter Development)
+find_package(nanobind REQUIRED HINTS ${Python_SITELIB}/nanobind/cmake)
 find_package(MPI REQUIRED COMPONENTS CXX)
+find_package(CUDAToolkit)
 
 add_subdirectory(src)

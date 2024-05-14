@@ -7,7 +7,13 @@ spack:
   specs:
   - mochi-thallium
   - py-m
-  - "cmake@3.20:"
+  - py-nanobind
+  - mpi
+  - 'cmake@3.25:'
+  - cuda
+  - gcc@13
   view: true
   concretizer:
     unify: true
+  repos:
+  - /home/runderwood/git/contrib/mochi-spack-packages
