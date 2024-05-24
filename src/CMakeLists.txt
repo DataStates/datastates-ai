@@ -8,10 +8,10 @@ target_include_directories(dstatesai_common
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/common>
     )
+target_link_libraries(dstatesai_common PUBLIC thallium)
 
 add_library(dstatesai_client client/client-cpp.cc)
-target_link_libraries(dstatesai_client PRIVATE dstatesai_common)
-target_link_libraries(dstatesai_client PUBLIC  thallium CUDA::cudart)
+target_link_libraries(dstatesai_client PUBLIC dstatesai_common CUDA::cudart)
 
 nanobind_add_module(dstatesai_python_client client/client-py-module.cc client/client-py-impl.cc)
 target_link_libraries(dstatesai_python_client PRIVATE dstatesai_client dstatesai_common)
