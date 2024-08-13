@@ -16,4 +16,4 @@ spack:
   concretizer:
     unify: true
   repos:
-  - /home/runderwood/git/contrib/mochi-spack-packages
+  - /opt/mochi-spack-packages
