@@ -1,0 +1,22 @@
+#!/bin/bash
+
+LIB_DIR=@CMAKE_INSTALL_FULL_LIBDIR@
+BIN_DIR=@CMAKE_INSTALL_FULL_BINDIR@
+TEST_DIR=@CMAKE_CURRENT_SOURCE_DIR@
+
+export LD_LIBRARY_PATH=$LIB_DIR:$LD_LIBRARY_PATH
+export PYTHONPATH=$LIB_DIR:$PYTHONPATH
+
+CONNECTION="ofi+tcp://127.0.0.1:1234"
+LOG_FILE=/dev/shm/evostore_slauncher-$HOSTNAME-$UID.log
+
+$BIN_DIR/evostore_slauncher -c $CONNECTION 2>&1 >$LOG_FILE &
+python $TEST_DIR/test_client.py -c $CONNECTION
+
+EXIT_CODE=$?
+killall evostore_slauncher
+
+echo "Log of backend:"
+cat $LOG_FILE
+
+exit $EXIT_CODE
