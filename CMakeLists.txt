@@ -29,3 +29,6 @@ find_package(CUDAToolkit)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src/common)
 add_subdirectory(src)
+
+enable_testing()
+add_subdirectory(tests)

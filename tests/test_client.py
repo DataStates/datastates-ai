@@ -1,13 +1,16 @@
+import argparse
 import torch
-import numpy
 import dstates.ai
 
-CONNECTION_STRING="ofi+tcp://127.0.0.1:1234"
-
 if __name__ == "__main__":
+    # argument parsing
+    parser = argparse.ArgumentParser(description='Simple DataStates-AI test.')
+    parser.add_argument('-c', '--connection', help='thallium connection string')
+    args = parser.parse_args()
+
     # initialization
     torch.manual_seed(1729)
-    backend = dstates.ai.evostore(CONNECTION_STRING.split('://')[0], [CONNECTION_STRING], 1 << 30)
+    backend = dstates.ai.evostore(args.connection.split('://')[0], [args.connection], 1 << 30)
 
     # save layers
     t1 = torch.rand(4, 5)
