@@ -12,8 +12,7 @@ spack:
   - 'cmake@3.25:'
   - cuda
   - gcc@13
+  - py-torch+cuda
   view: true
   concretizer:
     unify: true
-  repos:
-  - /opt/mochi-spack-packages
